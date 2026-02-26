@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: j.fox <jfox.42angouleme@gmail.com>         +#+  +:+       +#+        */
+/*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 14:51:05 by jfox              #+#    #+#             */
-/*   Updated: 2026/02/11 15:26:00 by j.fox            ###   ########.fr       */
+/*   Updated: 2026/02/26 12:11:39 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,7 @@ size_t	ft_printf_putstr_fd(char *s, int fd);
 \***********************/
 
 char	*get_next_line(int fd);
+char	*ft_strjoin_gnl(char *s1, char const *s2);
+char	*build_line_gnl(int fd, char *stash, int *goodread);
 
 #endif
