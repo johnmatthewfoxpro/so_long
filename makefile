@@ -6,7 +6,7 @@
 #    By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/11 14:15:59 by j.fox             #+#    #+#              #
-#    Updated: 2026/02/26 11:21:03 by jfox             ###   ########.fr        #
+#    Updated: 2026/02/26 18:04:39 by jfox             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ OBJECT_DIR ?= ./object_files
 SRC_DIR = ./src
 INC_DIR = ./header
 
-SRC = main.c errors.c map.c
+SRC = main.c errors.c map.c free.c
 
 NAME = so_long
 OBJ = $(SRC:%.c=$(OBJECT_DIR)/%.o)

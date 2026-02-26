@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:17:30 by j.fox             #+#    #+#             */
-/*   Updated: 2026/02/26 12:17:31 by jfox             ###   ########.fr       */
+/*   Updated: 2026/02/26 18:33:18 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 typedef struct	s_stack
 {
-	char	*map;
+	char	**map;
 	int		walls;
 	int		land;
 	int		player;
@@ -35,9 +35,13 @@ void	main_errors(int error);
 
 /*********map***********/
 void	read_map(char *map, t_game *so_long);
+char	**build_map(char *map);
 
 /*********game**********/
 
 /********render*********/
+
+/*********free**********/
+void	free_vals(t_game so_long);
 
 #endif
