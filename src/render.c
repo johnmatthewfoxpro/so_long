@@ -1,25 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/21 17:35:33 by jfox              #+#    #+#             */
-/*   Updated: 2026/02/25 20:48:46 by jfox             ###   ########.fr       */
+/*   Created: 2026/02/25 20:39:42 by jfox              #+#    #+#             */
+/*   Updated: 2026/02/25 20:39:43 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/solong.h"
-
-// check input arguments. Must have 2 in format <So_long> <map_file>
-// 
-int	main(int argc, char **argv)
-{
-	t_game	so_long;
-
-	if (argc != 2)
-		main_errors(-1);
-	read_map(argv[1], &so_long);
-	return (0);
-}
