@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: j.fox <jfox.42angouleme@gmail.com>         +#+  +:+       +#+        */
+/*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 09:49:05 by jfox              #+#    #+#             */
-/*   Updated: 2026/02/11 15:04:25 by j.fox            ###   ########.fr       */
+/*   Updated: 2026/02/26 12:11:30 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/libft.h"
 
-static char	*ft_strjoin_gnl(char *s1, char const *s2)
+char	*ft_strjoin_gnl(char *s1, char const *s2)
 {
 	char	*s3;
 	size_t	len1;
@@ -34,7 +34,7 @@ static char	*ft_strjoin_gnl(char *s1, char const *s2)
 	return (s3);
 }
 
-static char	*build_line(int fd, char *stash, int *goodread)
+char	*build_line_gnl(int fd, char *stash, int *goodread)
 {
 	char	*unchecked_line;
 	char	*temp;
@@ -96,7 +96,7 @@ char	*get_next_line(int fd)
 		stash[fd] = NULL;
 		return (NULL);
 	}
-	stash[fd] = build_line(fd, stash[fd], &goodread);
+	stash[fd] = build_line_gnl(fd, stash[fd], &goodread);
 	newline = check_line(&stash[fd]);
 	if ((newline == NULL || *newline == '\0'))
 	{
