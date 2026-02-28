@@ -6,70 +6,83 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 18:26:56 by jfox              #+#    #+#             */
-/*   Updated: 2026/02/26 18:38:00 by jfox             ###   ########.fr       */
+/*   Updated: 2026/02/28 19:57:15 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/solong.h"
 
-// find length of the map name as a string. +1 for null, -5 for '.ber\0'
-// count through the map string name until we reach len.
-// string compare the end of map string against .ber.
-// if the string does not end with .ber or only includes .ber exit with error.
-static int	map_format(char *map)
-{
-	int	len;
-	int i;
 
-	len = ft_strlen(map) + 1 - 5;
-	if (len <= 0)
-		return (0);
-	i = 0;
-	while (i != len)
+// check known collum number against every row. Throw error if not equal.
+// check if map is square.
+void	check_grid(t_game *so_long)
+{
+	int	y;
+
+	y = 0;
+	while (so_long->map[y])
 	{
-		map++;
-		i++;
+		if ((int)ft_strlen(so_long->map[y]) != so_long->collums)
+		{
+			free_vals(so_long);
+			map_errors(-4);
+		}
+		if ((int)ft_strlen(so_long->map[y]) == so_long->rows)
+		{
+			free_vals(so_long);
+			map_errors(-5);
+		}
+		y++;
 	}
-	if (ft_strncmp(map, ".ber", 4) != 0)
-		return (0);
-	return (1);
 }
 
-// join the map string so that it can be parsed.
-char	**build_map(char *map)
+void	check_characters(t_game *so_long)
 {
-	char	**complete_map;
-	char	*clone;
-	char	*tmp;
-	int		fd;
+	int	y;
+	int	x;
 
-	fd = open(map, O_RDONLY);
-	tmp = get_next_line(fd);
-	complete_map = NULL;
-	clone = NULL;
-	while (tmp)
+	y = 0;
+	while (so_long->map[y])
 	{
-		clone = ft_strjoin_gnl(clone, tmp);
-		free(tmp);
-		tmp = get_next_line(fd);
+		x = 0;
+		while (so_long->map[y][x])
+		{
+			if (so_long->map[y][x] != '0' && so_long->map[y][x] != '1'
+				&& so_long->map[y][x] != 'C' && so_long->map[y][x] != 'E'
+				&& so_long->map[y][x] != 'P')
+			{
+				free_vals(so_long);
+				map_errors(-6);
+			}
+			x++;
+		}
+		y++;
 	}
-	free(tmp);
-	complete_map = ft_split(clone, '\n');
-	free(clone);
-	return (complete_map);
 }
 
 // check valid map format '.ber'
 // turn map arument into a single string.
+// FInd number of collums with strlen then use i to find number of rows.
+// Check collums are equal. Then check all characters on map are valid.
 void	read_map(char *map, t_game *so_long)
 {
+	int	i;
+
+	i = 0;
 	if (!map || !map_format(map))
 		main_errors(-2);
 	so_long->map = build_map(map);
-	ft_printf("%s\n",so_long->map[0]);
-	ft_printf("%s\n",so_long->map[1]);
-	ft_printf("%s\n",so_long->map[2]);
-	ft_printf("%s\n",so_long->map[3]);
-	ft_printf("%s\n",so_long->map[4]);
+	// ft_printf("%s\n",so_long->map[0]);
+	// ft_printf("%s\n",so_long->map[1]);
+	// ft_printf("%s\n",so_long->map[2]);
+	// ft_printf("%s\n",so_long->map[3]);
+	// ft_printf("%s\n",so_long->map[4]);
+	// ft_printf("%s\n",so_long->map[5]);
+	so_long->collums = ft_strlen(so_long->map[i]);
+	while (so_long->map[i])
+		i++;
+	so_long->rows = i;
+	check_grid(so_long);
+	check_characters(so_long);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:17:30 by j.fox             #+#    #+#             */
-/*   Updated: 2026/02/26 18:33:18 by jfox             ###   ########.fr       */
+/*   Updated: 2026/02/28 19:06:27 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,48 @@
 # include <sys/time.h>
 # include <stdio.h>
 
-typedef struct	s_stack
+typedef struct s_pos
 {
-	char	**map;
-	int		walls;
-	int		land;
-	int		player;
-	int		collect;
-	int		door;
-}			t_game;
+	int			pos_x;
+	int			pos_y;
+}				t_pos;
+
+typedef struct s_player
+{
+	t_pos		position;
+}				t_player;
+
+typedef struct	s_game
+{
+	t_player	player;
+	//int		player;
+	char		**map;
+	int			walls;
+	int			land;
+	int			collect;
+	int			door;
+	int			rows;
+	int			collums;
+}				t_game;
 
 /*********main**********/
 
 /********errors*********/
 void	main_errors(int error);
+void	map_errors(int error);
+
+/*******map utils*******/
+int		map_format(char *map);
+char	**build_map(char *map);
 
 /*********map***********/
 void	read_map(char *map, t_game *so_long);
-char	**build_map(char *map);
 
 /*********game**********/
 
 /********render*********/
 
 /*********free**********/
-void	free_vals(t_game so_long);
+void	free_vals(t_game *so_long);
 
 #endif
