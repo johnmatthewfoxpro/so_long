@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 18:14:00 by jfox              #+#    #+#             */
-/*   Updated: 2026/03/01 12:38:06 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/01 18:32:55 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ char	**build_map(char *map)
 	free(tmp);
 	complete_map = ft_split(clone, '\n');
 	free(clone);
+	close(fd);
 	return (complete_map);
 }
 
@@ -97,6 +98,7 @@ void	check_grid(t_game *so_long)
 
 // check the map only uses correct characters. Error is anything is incorrect.
 // This also allows us to check is rows have spaces.
+// Finally we use pos struct to pass the starting coordinates of the P char.
 void	check_characters(t_game *so_long)
 {
 	int	y;
@@ -115,6 +117,11 @@ void	check_characters(t_game *so_long)
 				free_vals(so_long);
 				map_errors(-7);
 			}
+			else if (so_long->map[y][x] == 'P')
+			{
+				so_long->player.pos.x = x;
+				so_long->player.pos.y = y;
+			}
 			x++;
 		}
 		y++;
@@ -124,23 +131,23 @@ void	check_characters(t_game *so_long)
 // check all edges of map for 1's. If not all 1's, map is invalid.
 void	check_walls(t_game *so_long)
 {
-	int	x;
+	int	i;
 	int	valid;
 
-	x = 0;
+	i = 0;
 	valid = 1;
-	while (so_long->map[0][x])
+	while (so_long->map[0][i])
 	{
-		if (so_long->map[0][x] != '1' || so_long->map[so_long->rows - 1][x] != '1')
+		if (so_long->map[0][i] != '1' || so_long->map[so_long->rows - 1][i] != '1')
 			valid = 0;
-		x++;
+		i++;
 	}
-	x = 1;
-	while (so_long->map[x])
+	i = 1;
+	while (so_long->map[i])
 	{
-		if (so_long->map[x][0] != '1' || so_long->map[x][so_long->collums - 1] != '1')
+		if (so_long->map[i][0] != '1' || so_long->map[i][so_long->collums - 1] != '1')
 			valid = 0;
-		x++;
+		i++;
 	}
 	if (valid == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 17:35:33 by jfox              #+#    #+#             */
-/*   Updated: 2026/03/01 12:35:24 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/01 18:33:56 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,5 @@ int	main(int argc, char **argv)
 	read_map(argv[1], &so_long);
 	//game(&so_long);
 	free_vals(&so_long);
-	ft_printf("%d\n", so_long.rows);
-	ft_printf("%d\n", so_long.collums);
 	return (0);
 }

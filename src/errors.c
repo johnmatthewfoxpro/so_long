@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 18:24:00 by jfox              #+#    #+#             */
-/*   Updated: 2026/03/01 13:12:55 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/01 18:00:32 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	main_errors(int error)
 {
 	if (error == -1)
 	{
-		ft_printf("Invalid Format. Must be: <sl> <map.ber>\n");
+		ft_printf("Invalid Format. Must be: <so_long> <map.ber>\n");
 		exit(-1);
 	}
 	if (error == -2)
