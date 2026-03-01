@@ -6,11 +6,34 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 18:14:00 by jfox              #+#    #+#             */
-/*   Updated: 2026/02/28 17:48:09 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/01 12:38:06 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/solong.h"
+
+// find length of the map name as a string.
+// count through the map string name until we reach len.
+// string compare the end of map string against .ber.
+// if the string does not end with .ber or only includes .ber exit with error.
+int	map_format(char *map)
+{
+	int	len;
+	int i;
+
+	len = ft_strlen(map);
+	if (len <= 4)
+		return (0);
+	i = 0;
+	while (i != len)
+	{
+		map++;
+		i++;
+	}
+	if (ft_strncmp(map - 4, ".ber", 4) != 0)
+		return (0);
+	return (1);
+}
 
 // join the map string so that it can be parsed.
 // if there is nothing to read with open, send error.
@@ -42,25 +65,86 @@ char	**build_map(char *map)
 	return (complete_map);
 }
 
-// find length of the map name as a string.
-// count through the map string name until we reach len.
-// string compare the end of map string against .ber.
-// if the string does not end with .ber or only includes .ber exit with error.
-int	map_format(char *map)
+// check known collum number against every row. Throw error if not equal.
+// check if map is square.
+// check map is not bigger than display size. 1920 x 1080.
+void	check_grid(t_game *so_long)
 {
-	int	len;
-	int i;
+	int	y;
 
-	len = ft_strlen(map);
-	if (len <= 4)
-		return (0);
-	i = 0;
-	while (i != len)
+	y = 0;
+	while (so_long->map[y])
 	{
-		map++;
-		i++;
+		if ((int)ft_strlen(so_long->map[y]) != so_long->collums)
+		{
+			free_vals(so_long);
+			map_errors(-4);
+		}
+		if ((int)ft_strlen(so_long->map[y]) == so_long->rows)
+		{
+			free_vals(so_long);
+			map_errors(-5);
+		}
+		if (so_long->rows * TILE_SIZE > WINDOW_HEIGHT
+			|| so_long->collums * TILE_SIZE > WINDOW_WIDTH)
+		{
+			free_vals(so_long);
+			map_errors(-6);
+		}
+		y++;
 	}
-	if (ft_strncmp(map - 4, ".ber", 4) != 0)
-		return (0);
-	return (1);
+}
+
+// check the map only uses correct characters. Error is anything is incorrect.
+// This also allows us to check is rows have spaces.
+void	check_characters(t_game *so_long)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (so_long->map[y])
+	{
+		x = 0;
+		while (so_long->map[y][x])
+		{
+			if (so_long->map[y][x] != '0' && so_long->map[y][x] != '1'
+				&& so_long->map[y][x] != 'C' && so_long->map[y][x] != 'E'
+				&& so_long->map[y][x] != 'P')
+			{
+				free_vals(so_long);
+				map_errors(-7);
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
+// check all edges of map for 1's. If not all 1's, map is invalid.
+void	check_walls(t_game *so_long)
+{
+	int	x;
+	int	valid;
+
+	x = 0;
+	valid = 1;
+	while (so_long->map[0][x])
+	{
+		if (so_long->map[0][x] != '1' || so_long->map[so_long->rows - 1][x] != '1')
+			valid = 0;
+		x++;
+	}
+	x = 1;
+	while (so_long->map[x])
+	{
+		if (so_long->map[x][0] != '1' || so_long->map[x][so_long->collums - 1] != '1')
+			valid = 0;
+		x++;
+	}
+	if (valid == 0)
+	{
+		free_vals(so_long);
+		map_errors(-8);
+	}
 }

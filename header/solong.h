@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:17:30 by j.fox             #+#    #+#             */
-/*   Updated: 2026/02/28 19:06:27 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/01 12:42:47 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 # include <math.h>
 # include <sys/time.h>
 # include <stdio.h>
+
+/*********sizes**********/
+# define TILE_SIZE 50
+# define WINDOW_HEIGHT 1080
+# define WINDOW_WIDTH 1920
 
 typedef struct s_pos
 {
@@ -32,28 +37,27 @@ typedef struct s_player
 typedef struct	s_game
 {
 	t_player	player;
-	//int		player;
 	char		**map;
 	int			walls;
 	int			land;
 	int			collect;
-	int			door;
+	int			start;
+	int			exit;
 	int			rows;
 	int			collums;
 }				t_game;
 
 /*********main**********/
 
-/********errors*********/
-void	main_errors(int error);
-void	map_errors(int error);
+/*********map***********/
+void	read_map(char *map, t_game *so_long);
 
 /*******map utils*******/
 int		map_format(char *map);
 char	**build_map(char *map);
-
-/*********map***********/
-void	read_map(char *map, t_game *so_long);
+void	check_grid(t_game *so_long);
+void	check_characters(t_game *so_long);
+void	check_walls(t_game *so_long);
 
 /*********game**********/
 
@@ -61,5 +65,10 @@ void	read_map(char *map, t_game *so_long);
 
 /*********free**********/
 void	free_vals(t_game *so_long);
+
+/********errors*********/
+void	main_errors(int error);
+void	map_errors(int error);
+void	element_errors(t_game *so_long);
 
 #endif

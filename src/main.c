@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 17:35:33 by jfox              #+#    #+#             */
-/*   Updated: 2026/02/28 19:07:13 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/01 12:35:24 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // check input arguments. Must have 2 in format <So_long> <map_file>
 // zero game struct.
 // send first argument to read_map for validation and parsing.
-// launch game.
+// launch game. Render map, characters, wait loop.
 // free everything on close.
 int	main(int argc, char **argv)
 {
