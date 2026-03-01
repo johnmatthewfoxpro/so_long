@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:17:30 by j.fox             #+#    #+#             */
-/*   Updated: 2026/03/01 12:42:47 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/01 18:24:44 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,20 @@
 
 typedef struct s_pos
 {
-	int			pos_x;
-	int			pos_y;
+	int			x;
+	int			y;
 }				t_pos;
 
 typedef struct s_player
 {
-	t_pos		position;
+	t_pos		pos;
 }				t_player;
 
 typedef struct	s_game
 {
 	t_player	player;
 	char		**map;
+	char		**flood_map;
 	int			walls;
 	int			land;
 	int			collect;
@@ -52,12 +53,15 @@ typedef struct	s_game
 /*********map***********/
 void	read_map(char *map, t_game *so_long);
 
-/*******map utils*******/
+/*******map-utils*******/
 int		map_format(char *map);
 char	**build_map(char *map);
 void	check_grid(t_game *so_long);
 void	check_characters(t_game *so_long);
 void	check_walls(t_game *so_long);
+
+/*******map-fill*********/
+void	flood_fill(t_game *so_long);
 
 /*********game**********/
 
@@ -65,6 +69,7 @@ void	check_walls(t_game *so_long);
 
 /*********free**********/
 void	free_vals(t_game *so_long);
+void	free_flood_map(t_game *so_long);
 
 /********errors*********/
 void	main_errors(int error);
