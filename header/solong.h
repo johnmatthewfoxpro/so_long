@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:17:30 by j.fox             #+#    #+#             */
-/*   Updated: 2026/03/01 18:24:44 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/02 10:22:41 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ void	free_flood_map(t_game *so_long);
 void	main_errors(int error);
 void	map_errors(int error);
 void	element_errors(t_game *so_long);
+void	flood_errors(int error);
 
 #endif

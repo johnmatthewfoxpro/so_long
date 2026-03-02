@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 18:14:00 by jfox              #+#    #+#             */
-/*   Updated: 2026/03/01 18:32:55 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/02 10:33:10 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,14 +138,16 @@ void	check_walls(t_game *so_long)
 	valid = 1;
 	while (so_long->map[0][i])
 	{
-		if (so_long->map[0][i] != '1' || so_long->map[so_long->rows - 1][i] != '1')
+		if (so_long->map[0][i] != '1'
+			|| so_long->map[so_long->rows - 1][i] != '1')
 			valid = 0;
 		i++;
 	}
 	i = 1;
 	while (so_long->map[i])
 	{
-		if (so_long->map[i][0] != '1' || so_long->map[i][so_long->collums - 1] != '1')
+		if (so_long->map[i][0] != '1'
+			|| so_long->map[i][so_long->collums - 1] != '1')
 			valid = 0;
 		i++;
 	}

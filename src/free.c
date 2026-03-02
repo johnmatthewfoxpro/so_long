@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:59:08 by jfox              #+#    #+#             */
-/*   Updated: 2026/03/01 18:39:06 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/02 09:44:08 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	free_flood_map(t_game *so_long)
 	}
 	free(so_long->flood_map);
 	so_long->flood_map = NULL;
-	return ;
 }
 
 void	free_vals(t_game *so_long)
@@ -41,5 +40,4 @@ void	free_vals(t_game *so_long)
 		free_flood_map(so_long);
 	free(so_long->map);
 	so_long->map = NULL;
-	return ;
 }

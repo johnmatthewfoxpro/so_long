@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 18:26:56 by jfox              #+#    #+#             */
-/*   Updated: 2026/03/01 18:32:42 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/02 09:43:38 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,4 @@ void	read_map(char *map, t_game *so_long)
 	check_walls(so_long);
 	check_elements(so_long);
 	flood_fill(so_long);
-	return ;
 }
