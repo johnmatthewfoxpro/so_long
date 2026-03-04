@@ -6,7 +6,7 @@
 #    By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/11 14:15:59 by j.fox             #+#    #+#              #
-#    Updated: 2026/03/04 13:43:54 by jfox             ###   ########.fr        #
+#    Updated: 2026/03/04 15:28:39 by jfox             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJECT_DIR ?= ./object_files
 SRC_DIR = ./src
 INC_DIR = ./header
 
-SRC = main.c errors.c map.c map_utils.c map_fill.c free.c
+SRC = main.c map.c map_utils.c map_fill.c game.c render.c errors.c free.c
 
 NAME = so_long
 OBJ = $(SRC:%.c=$(OBJECT_DIR)/%.o)
@@ -37,7 +37,7 @@ $(OBJECT_DIR)/%.o: $(SRC_DIR)/%.c
 
 # --------- Build so_long ----------
 $(NAME): $(TOOLS) $(OBJ)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(TOOLS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(TOOLS) $(MLX_LIB) -lSDL2 -I $(MLX_DIR)/includes
 	@echo "\033[32m---------The so_long executable and object files have been made---------\033[0m"
 
 # -------- BUild MacrolibX ---------

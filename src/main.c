@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 17:35:33 by jfox              #+#    #+#             */
-/*   Updated: 2026/03/01 18:33:56 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/04 15:27:47 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 		main_errors(-1);
 	ft_bzero(&so_long, sizeof(so_long));
 	read_map(argv[1], &so_long);
-	//game(&so_long);
+	game(&so_long);
 	free_vals(&so_long);
 	return (0);
 }

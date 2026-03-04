@@ -28,6 +28,8 @@ You will see how many moves you made on exit, try to get a low score!
 
 ## RESOURCES
 
-AI Declaration: Chat gpt was used to understand the lay out of the project and to help with flood fill. I also used it to impliment the git clone of the minilibx into my makefile.
-I first looked up the minilibx documentation [here](https://harm-smits.github.io/42docs/libs/minilibx)
-I followed a couple of guides to get my project started. [Medium](https://medium.com/@digitalpoolng/42-so-long-and-thanks-for-all-the-fish-building-your-first-2d-game-in-c-ccd24034bc8b) and [Gitbook](https://42-cursus.gitbook.io/guide/2-rank-02/so_long/understand-so_long)
+AI Declaration: Chat gpt was used to understand the lay out of the project and to help with flood fill.\
+I also used it to impliment the git clone of the minilibx into my makefile.\
+I first looked up the minilibx documentation [here](https://harm-smits.github.io/42docs/libs/minilibx).\
+But I later chose to go with Macrolibx, [here](https://github.com/seekrs/MacroLibX) and its [documentation](https://macrolibx.kbz8.me/).\
+I followed a couple of guides to get my project started on [Medium](https://medium.com/@digitalpoolng/42-so-long-and-thanks-for-all-the-fish-building-your-first-2d-game-in-c-ccd24034bc8b) and [Gitbook](https://42-cursus.gitbook.io/guide/2-rank-02/so_long/understand-so_long).

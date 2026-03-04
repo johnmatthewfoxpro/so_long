@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:17:30 by j.fox             #+#    #+#             */
-/*   Updated: 2026/03/02 10:22:41 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/04 16:31:25 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,30 @@
 # define SOLONG_H
 
 # include "libft.h"
-# include <math.h>
+# include "../macrolibx/includes/mlx.h"
+# include "../macrolibx/includes/mlx_profile.h"
+# include "../macrolibx/includes/mlx_extended.h"
 # include <sys/time.h>
 # include <stdio.h>
+# include <math.h>
 
 /*********sizes**********/
 # define TILE_SIZE 50
 # define WINDOW_HEIGHT 1080
 # define WINDOW_WIDTH 1920
 
+/*****window _struct*****/
+// typedef struct	mlx_window_create_info
+// {
+// 	mlx_image	render_target;
+// 	const char	*title;
+// 	int			width;
+// 	int			height;
+// 	bool		is_fullscreen;
+// 	bool		is_resizeable;
+// } 				mlx_window_create_info;
+
+/********structs*********/
 typedef struct s_pos
 {
 	int			x;
@@ -64,6 +79,7 @@ void	check_walls(t_game *so_long);
 void	flood_fill(t_game *so_long);
 
 /*********game**********/
+void	game(t_game *so_long);
 
 /********render*********/
 
