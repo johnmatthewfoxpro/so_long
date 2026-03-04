@@ -6,9 +6,13 @@
 #    By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/11 14:15:59 by j.fox             #+#    #+#              #
-#    Updated: 2026/03/01 15:52:42 by jfox             ###   ########.fr        #
+#    Updated: 2026/03/04 13:43:54 by jfox             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+MLX_DIR = macrolibx
+MLX_REPO = https://github.com/seekrs/MacroLibX.git
+MLX_LIB = $(MLX_DIR)/libmlx.so
 
 OBJECT_DIR ?= ./object_files
 SRC_DIR = ./src
@@ -36,9 +40,17 @@ $(NAME): $(TOOLS) $(OBJ)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(TOOLS)
 	@echo "\033[32m---------The so_long executable and object files have been made---------\033[0m"
 
-# -------- Utility library ---------
-$(TOOLS):
+# -------- BUild MacrolibX ---------
+$(MLX_DIR):
+	@git clone $(MLX_REPO) $(MLX_DIR)
+
+$(MLX_LIB): $(MLX_DIR)
+	@$(MAKE) -j -C macrolibx
+
+# -------- Utility libraries --------
+$(TOOLS): $(MLX_LIB)
 	@$(MAKE) -C libft
+	@echo "\033[32m-------------The macrolibx was cloned and made successfully-------------\033[0m"
 
 clean:
 	@rm -rf $(OBJECT_DIR)
@@ -48,6 +60,9 @@ fclean: clean
 	@rm -f $(NAME)
 	@echo "\033[33m--------------The executable has been removed successfully--------------\033[0m"
 	@$(MAKE) fclean -C libft
+	@$(MAKE) fclean -C macrolibx
+	@rm -rf $(MLX_DIR)
+	@echo "\033[33m--------------The macrolibx has been removed successfully---------------\033[0m"
 	@echo "\033[33m"
 	@echo "=============================CLEAN COMPLETE============================="
 	@echo "\033[0m"
