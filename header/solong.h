@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:17:30 by j.fox             #+#    #+#             */
-/*   Updated: 2026/03/04 16:31:25 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/05 10:08:08 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define WINDOW_HEIGHT 1080
 # define WINDOW_WIDTH 1920
 
-/*****window _struct*****/
+/***window_struct_ref****/
 // typedef struct	mlx_window_create_info
 // {
 // 	mlx_image	render_target;
@@ -35,16 +35,26 @@
 // 	int			height;
 // 	bool		is_fullscreen;
 // 	bool		is_resizeable;
-// } 				mlx_window_create_info;
+// } 			mlx_window_create_info;
 
 /********structs*********/
-typedef struct s_pos
+typedef struct	s_mlx
+{
+	mlx_context	mlx;
+	mlx_window	win;
+	// mlx_image	logo_png;
+	// mlx_image	logo_jpg;
+	// mlx_image	logo_bmp;
+	// mlx_image	img;
+} 				t_mlx;
+
+typedef struct	s_pos
 {
 	int			x;
 	int			y;
 }				t_pos;
 
-typedef struct s_player
+typedef struct	s_player
 {
 	t_pos		pos;
 }				t_player;
