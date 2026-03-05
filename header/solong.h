@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:17:30 by j.fox             #+#    #+#             */
-/*   Updated: 2026/03/05 10:08:08 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/05 18:52:46 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,65 +23,65 @@
 
 /*********sizes**********/
 # define TILE_SIZE 50
-# define WINDOW_HEIGHT 1080
+# define WINDOW_HEIGHT 980
 # define WINDOW_WIDTH 1920
 
-/***window_struct_ref****/
-// typedef struct	mlx_window_create_info
-// {
-// 	mlx_image	render_target;
-// 	const char	*title;
-// 	int			width;
-// 	int			height;
-// 	bool		is_fullscreen;
-// 	bool		is_resizeable;
-// } 			mlx_window_create_info;
-
 /********structs*********/
-typedef struct	s_mlx
+typedef struct s_mlx
 {
 	mlx_context	mlx;
 	mlx_window	win;
-	// mlx_image	logo_png;
-	// mlx_image	logo_jpg;
-	// mlx_image	logo_bmp;
-	// mlx_image	img;
-} 				t_mlx;
+	mlx_image	gem;
+	mlx_image	land[3];
+	mlx_image	wall[3];
+	mlx_image	exit[2];
+	mlx_image	pmd[2];
+	mlx_image	pmu[2];
+	mlx_image	pml[2];
+	mlx_image	pmr[2];
+}				t_mlx;
 
-typedef struct	s_pos
+typedef struct s_pos
 {
 	int			x;
 	int			y;
 }				t_pos;
 
-typedef struct	s_player
+typedef struct s_player
 {
 	t_pos		pos;
 }				t_player;
 
-typedef struct	s_game
+typedef struct s_exit
 {
+	t_pos		pos;
+}				t_exit;
+
+typedef struct s_game
+{
+	t_mlx		mlx;
 	t_player	player;
+	t_exit		exit;
 	char		**map;
 	char		**flood_map;
-	int			walls;
-	int			land;
+	int			collums;
+	int			rows;
 	int			collect;
 	int			start;
-	int			exit;
-	int			rows;
-	int			collums;
+	int			end;
 }				t_game;
 
 /*********main**********/
 
 /*********map***********/
 void	read_map(char *map, t_game *so_long);
-
-/*******map-utils*******/
 int		map_format(char *map);
 char	**build_map(char *map);
+
+/*******map-utils*******/
 void	check_grid(t_game *so_long);
+void	check_elements(t_game *so_long);
+void	set_start_end(t_game *so_long, int x, int y);
 void	check_characters(t_game *so_long);
 void	check_walls(t_game *so_long);
 
@@ -92,15 +92,22 @@ void	flood_fill(t_game *so_long);
 void	game(t_game *so_long);
 
 /********render*********/
+void	load_map(t_game *so_long);
+void	draw_map(t_game *so_long);
+
+/********events*********/
+void	event_hook(int key, void *param);
 
 /*********free**********/
 void	free_vals(t_game *so_long);
 void	free_flood_map(t_game *so_long);
+void	free_mlx(t_game *so_long);
 
 /********errors*********/
 void	main_errors(int error);
 void	map_errors(int error);
 void	element_errors(t_game *so_long);
 void	flood_errors(int error);
+void	mlx_errors(int error);
 
 #endif

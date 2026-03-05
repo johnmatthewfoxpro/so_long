@@ -6,41 +6,64 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 18:26:56 by jfox              #+#    #+#             */
-/*   Updated: 2026/03/02 09:43:38 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/05 18:38:08 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/solong.h"
 
-// simply count the number of Exits, Players and Collectibles.
-// loop through whole map.
-// If condition at the bottom to control if the number of elements is invalid.
-static void	check_elements(t_game *so_long)
+// find length of the map name as a string.
+// count through the map string name until we reach len.
+// string compare the end of map string against .ber.
+// if the string does not end with .ber or only includes .ber exit with error.
+int	map_format(char *map)
 {
-	int	y;
-	int	x;
+	int	len;
+	int	i;
 
-	y = 0;
-	while (so_long->map[y])
+	len = ft_strlen(map);
+	if (len <= 4)
+		return (0);
+	i = 0;
+	while (i != len)
 	{
-		x = 0;
-		while (so_long->map[y][x])
-		{
-			if (so_long->map[y][x] == 'E')
-				so_long->exit += 1;
-			else if (so_long->map[y][x] == 'P')
-				so_long->start += 1;
-			else if (so_long->map[y][x] == 'C')
-				so_long->collect += 1;
-			x++;
-		}
-		y++;
+		map++;
+		i++;
 	}
-	if (so_long->exit != 1 || so_long->start != 1 || so_long->collect < 1)
+	if (ft_strncmp(map - 4, ".ber", 4) != 0)
+		return (0);
+	return (1);
+}
+
+// join the map string so that it can be parsed.
+// if there is nothing to read with open, send error.
+// the complete map in the result of this table works to define collums, rows.
+// **map[0][0] this is the top left position of the map. First[0] is the row.
+// The second [0] is the collum.
+char	**build_map(char *map)
+{
+	char	**complete_map;
+	char	*clone;
+	char	*tmp;
+	int		fd;
+
+	fd = open(map, O_RDONLY);
+	if (fd == -1)
+		main_errors(-3);
+	tmp = get_next_line(fd);
+	complete_map = NULL;
+	clone = NULL;
+	while (tmp)
 	{
-		free_vals(so_long);
-		element_errors(so_long);
+		clone = ft_strjoin_gnl(clone, tmp);
+		free(tmp);
+		tmp = get_next_line(fd);
 	}
+	free(tmp);
+	complete_map = ft_split(clone, '\n');
+	free(clone);
+	close(fd);
+	return (complete_map);
 }
 
 // check valid map format '.ber'

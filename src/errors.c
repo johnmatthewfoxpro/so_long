@@ -6,12 +6,13 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 18:24:00 by jfox              #+#    #+#             */
-/*   Updated: 2026/03/02 10:27:13 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/05 18:51:16 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/solong.h"
 
+// error handling for poor arguments in the command line or wrong file formats.
 void	main_errors(int error)
 {
 	if (error < 0)
@@ -37,7 +38,7 @@ void	map_errors(int error)
 	if (error == -5)
 		ft_printf("Invalid map. The map must be rectangular.\n");
 	if (error == -6)
-		ft_printf("Invalid map. Map is too big. 38 x 21 is MAX grid size.\n");
+		ft_printf("Invalid map. Map is too big. 38 x 19 is MAX grid size.\n");
 	if (error == -7)
 		ft_printf("Invalid map. Map files can only use: 0, 1, C, E, P.\n");
 	if (error == -8)
@@ -45,10 +46,12 @@ void	map_errors(int error)
 	exit(EXIT_FAILURE);
 }
 
+// errors for wrong numbers of items of the maps.
+// Player starts, exits and collectibles are covered.
 void	element_errors(t_game *so_long)
 {
 	ft_printf("Error\n");
-	if (so_long->exit != 1)
+	if (so_long->end != 1)
 		ft_printf("Invalid element. Maps must have 1 exit. ('E')\n");
 	if (so_long->start != 1)
 		ft_printf("Invalid element. Maps must have 1 player. ('P')\n");
@@ -57,11 +60,27 @@ void	element_errors(t_game *so_long)
 	exit(EXIT_FAILURE);
 }
 
+// error handle for bad paths if the flood fill does not complete.
 void	flood_errors(int error)
 {
 	if (error < 0)
 		ft_printf("Error\n");
 	if (error == -12)
 		ft_printf("Invalid path. There is no valid path to solve the map.\n");
+	exit(EXIT_FAILURE);
+}
+
+// when loading images or rendering the window with macrolibx if there are
+// errors they are handled here.
+void	mlx_errors(int error)
+{
+	if (error < 0)
+		ft_printf("Error\n");
+	if (error == -13)
+		ft_printf("Failed MLX. The MLX INIT has failed.\n");
+	if (error == -14)
+		ft_printf("Failed MLX. The MLX WINDOW failed to open.\n");
+	if (error == -15)
+		ft_printf("Failed MLX. The MLX IMG was not created.\n");
 	exit(EXIT_FAILURE);
 }

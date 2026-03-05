@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/21 17:35:33 by jfox              #+#    #+#             */
-/*   Updated: 2026/03/05 17:41:56 by jfox             ###   ########.fr       */
+/*   Created: 2026/03/05 15:19:48 by jfox              #+#    #+#             */
+/*   Updated: 2026/03/05 18:40:00 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/solong.h"
 
-// check input arguments. Must have 2 in format <So_long> <map_file>
-// zero game struct.
-// send first argument to read_map for validation and parsing.
-// launch game. Render map, characters, wait loop.
-// free everything on close.
-int	main(int argc, char **argv)
+// if escape is pressed we stop the mlx_loop and so we continue game function
+// 0 is when we trigger the close of the window by clicking the cross
+void	event_hook(int key, void *param)
 {
-	t_game	so_long;
-
-	if (argc != 2)
-		main_errors(-1);
-	ft_bzero(&so_long, sizeof(so_long));
-	read_map(argv[1], &so_long);
-	game(&so_long);
-	return (0);
+	if (key == 41)
+		mlx_loop_end((mlx_context)param);
+	if (key == 0)
+		mlx_loop_end((mlx_context)param);
 }

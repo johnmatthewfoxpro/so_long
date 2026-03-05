@@ -6,83 +6,44 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:39:32 by jfox              #+#    #+#             */
-/*   Updated: 2026/03/05 12:16:44 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/05 17:42:14 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/solong.h"
 
+static void	game_init(t_game *so_long, mlx_window_create_info window_info)
+{
+	so_long->mlx.mlx = mlx_init();
+	if (so_long->mlx.mlx == NULL)
+	{
+		free_mlx(so_long);
+		mlx_errors(-13);
+	}
+	so_long->mlx.win = mlx_new_window(so_long->mlx.mlx, &window_info);
+	if (so_long->mlx.win == NULL)
+	{
+		free_mlx(so_long);
+		mlx_errors(-14);
+	}
+}
+
 void	game(t_game *so_long)
 {
-	int y;
-	int x;
-	int w;
-	int h;
-	// int i;
-	// int j;
-	mlx_context				mlx;
 	mlx_window_create_info	window_info;
-	mlx_window				win;
 
-	mlx = mlx_init();
 	ft_bzero(&window_info, sizeof(window_info));
 	window_info.title = "so_long";
-	window_info.width = WINDOW_WIDTH;
-	window_info.height = WINDOW_HEIGHT;
-	win = mlx_new_window(mlx, &window_info);
-
-	// i = 0;
-	// while (i < TILE_SIZE)
-	// {
-	// 	j = 0;
-	// 	while (j < TILE_SIZE)
-	// 	{
-	// 		mlx_pixel_put(mlx, win, i, j, (mlx_color){.rgba = 0xFF0000FF});
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
-
-	mlx_image	img;
-	y = 0;
-	while (so_long->map[y])
-	{
-		x = 0;
-		while (so_long->map[y][x])
-		{
-			if (so_long->map[y][x] == '1')
-			{
-				img = mlx_new_image_from_file(mlx, "assets/wall1.png", &h, &w);
-				mlx_put_image_to_window(mlx, win, img, x * TILE_SIZE, y * TILE_SIZE);
-			}
-			else if (so_long->map[y][x] == '0')
-			{
-				img = mlx_new_image_from_file(mlx, "assets/land1.png", &h, &w);
-				mlx_put_image_to_window(mlx, win, img, x * TILE_SIZE, y * TILE_SIZE);
-			}
-			else if (so_long->map[y][x] == 'C')
-			{
-				img = mlx_new_image_from_file(mlx, "assets/gem.png", &h, &w);
-				mlx_put_image_to_window(mlx, win, img, x * TILE_SIZE, y * TILE_SIZE);
-			}
-			else if (so_long->map[y][x] == 'E')
-			{
-				img = mlx_new_image_from_file(mlx, "assets/exitoff.png", &h, &w);
-				mlx_put_image_to_window(mlx, win, img, x * TILE_SIZE, y * TILE_SIZE);
-			}
-			else if (so_long->map[y][x] == 'P')
-			{
-				img = mlx_new_image_from_file(mlx, "assets/player1.png", &h, &w);
-				mlx_put_image_to_window(mlx, win, img, x * TILE_SIZE, y * TILE_SIZE);
-			}
-			x++;
-		}
-		y++;
-	}
-	
-	mlx_loop(mlx);
-	mlx_destroy_image(mlx, img);
-	mlx_destroy_window(mlx, win);
-	mlx_destroy_context(mlx);
-	return ;
+	window_info.width = so_long->collums * TILE_SIZE;
+	window_info.height = so_long->rows * TILE_SIZE;
+	game_init(so_long, window_info);
+	mlx_set_fps_goal(so_long->mlx.mlx, 30);
+	load_map(so_long);
+	draw_map(so_long);
+	mlx_on_event(so_long->mlx.mlx, so_long->mlx.win,
+		MLX_KEYDOWN, event_hook, so_long->mlx.mlx);
+	mlx_on_event(so_long->mlx.mlx, so_long->mlx.win,
+		MLX_WINDOW_EVENT, event_hook, so_long->mlx.mlx);
+	mlx_loop(so_long->mlx.mlx);
+	free_mlx(so_long);
 }
