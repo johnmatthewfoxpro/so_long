@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:17:30 by j.fox             #+#    #+#             */
-/*   Updated: 2026/03/06 13:01:24 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/06 16:45:14 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,38 +27,41 @@
 # define WINDOW_WIDTH 1920
 
 /********structs*********/
+// mlx struc for macrolibx
 typedef struct s_mlx
 {
 	mlx_context	mlx;
 	mlx_window	win;
 	mlx_image	gem;
-	mlx_image	pmd[2];
-	mlx_image	pmu[2];
-	mlx_image	pml[2];
-	mlx_image	pmr[2];
+	mlx_image	pld[4];
 	mlx_image	land[5];
 	mlx_image	wall[5];
 	mlx_image	exit[2];
 }				t_mlx;
 
+// a coordinate struct to hold x and y
 typedef struct s_pos
 {
 	int			x;
 	int			y;
 }				t_pos;
 
+// player struct holds x and y positions and the current direction
 typedef struct s_player
 {
 	t_pos		pos;
-	char		dir;
+	int			dir;
 }				t_player;
 
+// exit struct holds x and y positions and open or closed state.
 typedef struct s_exit
 {
 	t_pos		pos;
 	int			open;
 }				t_exit;
 
+// game struct holds all other structs, cam maps as char **'s
+// other useful counters are stored for collectables, movement etc.
 typedef struct s_game
 {
 	t_mlx		mlx;
@@ -74,17 +77,12 @@ typedef struct s_game
 	int			end;
 }				t_game;
 
-/*********main**********/
-
 /*********map***********/
 void	read_map(char *map, t_game *so_long);
-int		map_format(char *map);
-char	**build_map(char *map);
 
 /*******map-utils*******/
 void	check_grid(t_game *so_long);
 void	check_elements(t_game *so_long);
-void	set_start_end(t_game *so_long, int x, int y);
 void	check_characters(t_game *so_long);
 void	check_walls(t_game *so_long);
 

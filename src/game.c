@@ -6,12 +6,14 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:39:32 by jfox              #+#    #+#             */
-/*   Updated: 2026/03/06 13:09:36 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/06 16:30:27 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/solong.h"
 
+// a small function to initialize the mlx window and mlx.
+// on errors this frees the whole game, prints an error and quits.
 static void	game_init(t_game *so_long, mlx_window_create_info window_info)
 {
 	so_long->mlx.mlx = mlx_init();
@@ -28,6 +30,15 @@ static void	game_init(t_game *so_long, mlx_window_create_info window_info)
 	}
 }
 
+// here we initialize all our mlx elements.
+// call window struct and define its size based on the size of the map.
+// initate the mlx, check for errors inside that function.
+// set fps goal to control memory usage.
+// set a player direction for when we draw the map.
+// load all map images, quit on load errors, once loaded build the map.
+// set hooks for player imput, window and keyboard events.
+// finally loop with mlx_loop until exit or player victory.
+// once loop ends, free whole game, destroy mlx, with free_mlx.
 void	game(t_game *so_long)
 {
 	mlx_window_create_info	window_info;
@@ -38,7 +49,7 @@ void	game(t_game *so_long)
 	window_info.height = so_long->rows * TILE_SIZE;
 	game_init(so_long, window_info);
 	mlx_set_fps_goal(so_long->mlx.mlx, 30);
-	// so_long->player.dir = 'd';
+	so_long->player.dir = 2;
 	load_map(so_long);
 	draw_map(so_long);
 	mlx_on_event(so_long->mlx.mlx, so_long->mlx.win,

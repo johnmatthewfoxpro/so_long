@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 10:28:07 by jfox              #+#    #+#             */
-/*   Updated: 2026/03/06 13:03:38 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/06 16:37:21 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // in the struct so_long by 1. And print a 0 to the map.
 // This ensures when we draw map next time the crytal will dissapear.
 // if crystals = 0, we say the door is open.
-static void collect_gem(t_game *so_long)
+static void	collect_gem(t_game *so_long)
 {
 	so_long->collect--;
 	so_long->map[so_long->player.pos.y][so_long->player.pos.x] = '0';
@@ -53,22 +53,22 @@ void	move_player(t_game *so_long, int key)
 {
 	if ((key == 82 || key == 26) && (can_move(so_long, 'u') == 1))
 	{
-		so_long->player.dir = 'u';
+		so_long->player.dir = 0;
 		so_long->player.pos.y -= 1;
 	}
 	if ((key == 80 || key == 4) && (can_move(so_long, 'l') == 1))
 	{
-		so_long->player.dir = 'l';
+		so_long->player.dir = 1;
 		so_long->player.pos.x -= 1;
 	}
 	if ((key == 81 || key == 22) && (can_move(so_long, 'd') == 1))
 	{
-		so_long->player.dir = 'd';
+		so_long->player.dir = 2;
 		so_long->player.pos.y += 1;
 	}
 	if ((key == 79 || key == 7) && (can_move(so_long, 'r') == 1))
 	{
-		so_long->player.dir = 'r';
+		so_long->player.dir = 3;
 		so_long->player.pos.x += 1;
 	}
 	if (so_long->map[so_long->player.pos.y][so_long->player.pos.x] == 'C')

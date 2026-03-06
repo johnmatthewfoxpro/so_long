@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 17:35:33 by jfox              #+#    #+#             */
-/*   Updated: 2026/03/05 17:41:56 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/06 14:56:27 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 // zero game struct.
 // send first argument to read_map for validation and parsing.
 // launch game. Render map, characters, wait loop.
-// free everything on close.
 int	main(int argc, char **argv)
 {
 	t_game	so_long;

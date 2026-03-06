@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 18:26:56 by jfox              #+#    #+#             */
-/*   Updated: 2026/03/05 18:38:08 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/06 16:38:35 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // count through the map string name until we reach len.
 // string compare the end of map string against .ber.
 // if the string does not end with .ber or only includes .ber exit with error.
-int	map_format(char *map)
+static int	map_format(char *map)
 {
 	int	len;
 	int	i;
@@ -40,7 +40,7 @@ int	map_format(char *map)
 // the complete map in the result of this table works to define collums, rows.
 // **map[0][0] this is the top left position of the map. First[0] is the row.
 // The second [0] is the collum.
-char	**build_map(char *map)
+static char	**build_map(char *map)
 {
 	char	**complete_map;
 	char	*clone;

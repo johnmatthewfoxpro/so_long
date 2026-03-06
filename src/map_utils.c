@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 18:14:00 by jfox              #+#    #+#             */
-/*   Updated: 2026/03/05 13:52:38 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/06 16:39:37 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	check_elements(t_game *so_long)
 
 // super easy compartmentalisation function to save the locations of the player
 // and exit. This allows them to be used later for animations and events.
-void	set_start_end(t_game *so_long, int x, int y)
+static void	set_start_end(t_game *so_long, int x, int y)
 {
 	if (so_long->map[y][x] == 'P')
 	{
