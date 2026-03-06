@@ -6,7 +6,7 @@
 #    By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/11 14:15:59 by j.fox             #+#    #+#              #
-#    Updated: 2026/03/05 15:24:19 by jfox             ###   ########.fr        #
+#    Updated: 2026/03/06 10:28:01 by jfox             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC_DIR = ./src
 INC_DIR = ./header
 
 SRC = main.c map.c map_utils.c map_fill.c game.c render.c \
-events.c errors.c free.c
+movement.c events.c errors.c free.c
 
 NAME = so_long
 OBJ = $(SRC:%.c=$(OBJECT_DIR)/%.o)

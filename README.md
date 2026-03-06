@@ -14,7 +14,9 @@ Collect all the crystals and escape back to safety!
 Use 'make' to generate the so_long executable. This will also download the minilibx library that we have been authrorized to use for this project. It is this library that permits the generation
 of the graphical elements and the game window.
 
-One the game executable is made we it with a map file. Any .ber will be accepted but certain conditions must be met, for example:
+***NOTE*** If using this program outside of school 42 environment you will need WSL and Vulkan support. Refer to the dependancies in the Macrolibx documentation.
+
+Once the game executable is made we it with a map file. Any .ber will be accepted but certain conditions must be met, for example:
 * The map must exist, no empty .ber files will be accepted.
 * The map must be rectangular.
 * The map must not be too tall or too wide.
@@ -24,11 +26,13 @@ One the game executable is made we it with a map file. Any .ber will be accepted
 
 If the Map passes these checks, the game will be launched.
 
-After that have fun, find the collectibles and leave via the exit.
+After that have fun, use 'WASD' or the 'ARROW' keys to move through the maps and find the collectibles and leave via the exit.
 
-You will see how many moves you made on exit, try to get a low score!\
+You can exit at any time with 'ESC' key or by closing the window by clicking the 'x' with your mouse.
 
-Valgrind checks will show huge leaks unless you use:\
+You will see how many moves you made on exit, try to get a low score!
+
+Valgrind checks will show huge leaks unless you use:
 * --suppressions=macrolibx/valgrind.supp
 
 ## RESOURCES

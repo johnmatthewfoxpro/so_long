@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 18:24:00 by jfox              #+#    #+#             */
-/*   Updated: 2026/03/05 18:51:16 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/06 08:51:29 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	mlx_errors(int error)
 	if (error == -13)
 		ft_printf("Failed MLX. The MLX INIT has failed.\n");
 	if (error == -14)
-		ft_printf("Failed MLX. The MLX WINDOW failed to open.\n");
+		ft_printf("Failed MLX. The MLX WINDOW failed to initialize.\n");
 	if (error == -15)
 		ft_printf("Failed MLX. The MLX IMG was not created.\n");
 	exit(EXIT_FAILURE);

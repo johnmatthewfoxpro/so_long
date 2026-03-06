@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:17:30 by j.fox             #+#    #+#             */
-/*   Updated: 2026/03/05 18:52:46 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/06 13:01:24 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ typedef struct s_mlx
 	mlx_context	mlx;
 	mlx_window	win;
 	mlx_image	gem;
-	mlx_image	land[3];
-	mlx_image	wall[3];
-	mlx_image	exit[2];
 	mlx_image	pmd[2];
 	mlx_image	pmu[2];
 	mlx_image	pml[2];
 	mlx_image	pmr[2];
+	mlx_image	land[5];
+	mlx_image	wall[5];
+	mlx_image	exit[2];
 }				t_mlx;
 
 typedef struct s_pos
@@ -50,11 +50,13 @@ typedef struct s_pos
 typedef struct s_player
 {
 	t_pos		pos;
+	char		dir;
 }				t_player;
 
 typedef struct s_exit
 {
 	t_pos		pos;
+	int			open;
 }				t_exit;
 
 typedef struct s_game
@@ -64,6 +66,7 @@ typedef struct s_game
 	t_exit		exit;
 	char		**map;
 	char		**flood_map;
+	int			counter;
 	int			collums;
 	int			rows;
 	int			collect;
@@ -97,6 +100,10 @@ void	draw_map(t_game *so_long);
 
 /********events*********/
 void	event_hook(int key, void *param);
+void	move_hook(int key, void *param);
+
+/*******movement********/
+void	move_player(t_game *so_long, int key);
 
 /*********free**********/
 void	free_vals(t_game *so_long);

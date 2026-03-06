@@ -6,7 +6,7 @@
 /*   By: jfox <jfox.42angouleme@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:59:08 by jfox              #+#    #+#             */
-/*   Updated: 2026/03/05 18:55:37 by jfox             ###   ########.fr       */
+/*   Updated: 2026/03/06 11:19:57 by jfox             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ void	free_vals(t_game *so_long)
 
 static void	free_mlx_cont(t_game *so_long)
 {
+	if (so_long->mlx.gem)
+		mlx_destroy_image(so_long->mlx.mlx, so_long->mlx.gem);
+	if (so_long->mlx.pmd[0])
+		mlx_destroy_image(so_long->mlx.mlx, so_long->mlx.pmd[0]);
+	if (so_long->mlx.pmd[1])
+		mlx_destroy_image(so_long->mlx.mlx, so_long->mlx.pmd[1]);
 	if (so_long->mlx.pmu[0])
 		mlx_destroy_image(so_long->mlx.mlx, so_long->mlx.pmu[0]);
 	if (so_long->mlx.pmu[1])
@@ -56,8 +62,10 @@ static void	free_mlx_cont(t_game *so_long)
 		mlx_destroy_image(so_long->mlx.mlx, so_long->mlx.pmr[0]);
 	if (so_long->mlx.pmr[1])
 		mlx_destroy_image(so_long->mlx.mlx, so_long->mlx.pmr[1]);
-	mlx_destroy_window(so_long->mlx.mlx, so_long->mlx.win);
-	mlx_destroy_context(so_long->mlx.mlx);
+	if (so_long->mlx.win)
+		mlx_destroy_window(so_long->mlx.mlx, so_long->mlx.win);
+	if (so_long->mlx.mlx)
+		mlx_destroy_context(so_long->mlx.mlx);
 	free_vals(so_long);
 }
 
@@ -73,17 +81,19 @@ void	free_mlx(t_game *so_long)
 		mlx_destroy_image(so_long->mlx.mlx, so_long->mlx.land[1]);
 	if (so_long->mlx.land[2])
 		mlx_destroy_image(so_long->mlx.mlx, so_long->mlx.land[2]);
+	if (so_long->mlx.land[3])
+		mlx_destroy_image(so_long->mlx.mlx, so_long->mlx.land[3]);
+	if (so_long->mlx.land[4])
+		mlx_destroy_image(so_long->mlx.mlx, so_long->mlx.land[4]);
 	if (so_long->mlx.wall[0])
 		mlx_destroy_image(so_long->mlx.mlx, so_long->mlx.wall[0]);
 	if (so_long->mlx.wall[1])
 		mlx_destroy_image(so_long->mlx.mlx, so_long->mlx.wall[1]);
 	if (so_long->mlx.wall[2])
 		mlx_destroy_image(so_long->mlx.mlx, so_long->mlx.wall[2]);
-	if (so_long->mlx.gem)
-		mlx_destroy_image(so_long->mlx.mlx, so_long->mlx.gem);
-	if (so_long->mlx.pmd[0])
-		mlx_destroy_image(so_long->mlx.mlx, so_long->mlx.pmd[0]);
-	if (so_long->mlx.pmd[1])
-		mlx_destroy_image(so_long->mlx.mlx, so_long->mlx.pmd[1]);
+	if (so_long->mlx.wall[3])
+		mlx_destroy_image(so_long->mlx.mlx, so_long->mlx.wall[3]);
+	if (so_long->mlx.wall[4])
+		mlx_destroy_image(so_long->mlx.mlx, so_long->mlx.wall[4]);
 	free_mlx_cont(so_long);
 }
